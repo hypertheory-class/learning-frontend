@@ -22,6 +22,23 @@ describe('functions', () => {
 
       expect(multiply(5, 5)).toBe(25);
     });
+
+    it('function overloading', () => {
+      function formatName(first: string, last: string, mi?: string): string {
+        let fullName = `${last}, ${first}`;
+        if (mi) {
+          // mi !== undefined && mi !== null && mi !== 0 && mi !== false
+          fullName += ` ${mi}.`;
+        }
+        return fullName;
+      }
+
+      expect(formatName('Han', 'Solo')).toBe('Solo, Han');
+      expect(formatName('Han', 'Solo', 'D')).toBe('Solo, Han D.');
+
+      expect('tacos').toBeTruthy();
+      expect(undefined).toBeFalsy();
+    });
   });
 
   describe('higher order functions', () => {});
