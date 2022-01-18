@@ -103,7 +103,57 @@ describe('functions', () => {
     });
   });
 
-  describe('array methods', () => {});
+  describe('array methods', () => {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    it('array method for visiting each element of an array (forEach)', () => {
+      let total = 0;
+      numbers.forEach((n) => (total += n));
+      expect(total).toBe(45);
+    });
+
+    describe('array methods that create a new array', () => {
+      it('filter', () => {
+        // Where in LINQ
+        function isEven(n: number): boolean {
+          return n % 2 === 0;
+        }
+        function isOdd(n: number): boolean {
+          return !isEven(n);
+        }
+
+        const evens = numbers.filter(isEven); // rookie mistake
+        const odds = numbers.filter(isOdd);
+        const bigNumbers = numbers.filter((n) => n > 1000);
+
+        expect(bigNumbers).toEqual([]);
+        expect(bigNumbers.length).toBe(0);
+
+        expect(odds).toEqual([1, 3, 5, 7, 9]);
+        expect(evens).toEqual([2, 4, 6, 8]);
+        expect(numbers).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]); // look ma! No mutations!
+      });
+
+      it('map', () => {
+        // like Select in Linq
+        // Transforms each element in an array to something else.
+
+        const a1 = numbers.map((n) => n * 2);
+        expect(a1).toEqual([2, 4, 6, 8, 10, 12, 14, 16, 18]);
+        expect(numbers).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]); // look ma! No mutations!
+
+        const doubledEvens = numbers.filter(isEven).map((n) => n + n);
+
+        expect(doubledEvens).toEqual([4, 8, 12, 16]);
+      });
+    });
+
+    describe('array methods that return a single (scalar) value', () => {
+      it('checking the membership of an array', () => {});
+
+      it('boiling down an array to a single value', () => {});
+    });
+  });
 });
 
 // files in typescript and javascript are "modules" (sort of. more later)
