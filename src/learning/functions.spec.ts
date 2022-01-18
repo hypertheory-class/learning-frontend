@@ -155,7 +155,90 @@ describe('functions', () => {
         expect(someEven).toBeTrue();
       });
 
-      it('boiling down an array to a single value', () => {});
+      it('boiling down an array to a single value', () => {
+        const sum = numbers.reduce((a, b) => a + b);
+        expect(sum).toBe(45);
+        const bigSum = numbers.reduce((a, b) => a + b, 100);
+        expect(bigSum).toBe(145);
+      });
+    });
+  });
+});
+
+describe('some examples and practices', () => {
+  it('practice 1 - we will do this together', () => {
+    interface Employee {
+      name: string;
+      dept: string;
+      pay: number;
+    }
+    const employees: Employee[] = [
+      { name: 'Karen', dept: 'DEV', pay: 120_000 },
+      { name: 'Steven', dept: 'DEV', pay: 111_000 },
+      { name: 'Jim', dept: 'QA', pay: 93_000 },
+      { name: 'Sue', dept: 'DEV', pay: 180_000 },
+    ];
+
+    const totalPayForDevelopers = employees
+      .filter((e) => e.dept === 'DEV')
+      .reduce((state: number, emp: Employee) => (state += emp.pay), 0);
+
+    expect(totalPayForDevelopers).toBe(120_000 + 111_000 + 180_000);
+  });
+
+  it('bowling scores', () => {
+    // context: in bowling the highest score wins. Highest score possible is 300, lowest is zero.
+    // 1 - define your data types. This is TypeScript! Types Help!
+    interface BowlingGame {
+      name: string;
+      score: number;
+    }
+
+    // 2. Define the data type for what I want back.
+    interface GameSummary {
+      highScore: number;
+      highScorer: string;
+      lowScore: number;
+      lowScorer: string;
+    }
+    const bowlers: BowlingGame[] = [
+      { name: 'Jeff', score: 73 },
+      { name: 'Stacey', score: 218 },
+      { name: 'Henry', score: 118 },
+      { name: 'Violet', score: 127 },
+    ];
+
+    // Who had the highest score? What was their score?
+    // who had the lowest score? what was their score?
+    // (we are ignoring the possibility of ties in this example... extra credit if you take it into account)
+
+    // 3. define what our initial state is
+    const initialState: GameSummary = {
+      highScore: -1, // ANY score in bowling will be higher than this.
+      highScorer: '',
+      lowScore: 301, // ANY score in bowling will be lower than this.
+      lowScorer: '',
+    };
+
+    const gameSummary: GameSummary = bowlers.reduce(
+      (state: GameSummary, game: BowlingGame) => {
+        return {
+          highScore:
+            game.score > state.highScore ? game.score : state.highScore,
+          highScorer:
+            game.score > state.highScore ? game.name : state.highScorer,
+          lowScore: game.score < state.lowScore ? game.score : state.lowScore,
+          lowScorer: game.score < state.lowScore ? game.name : state.lowScorer,
+        } as GameSummary;
+      },
+      initialState
+    );
+
+    expect(gameSummary).toEqual({
+      highScore: 218,
+      highScorer: 'Stacey',
+      lowScore: 73,
+      lowScorer: 'Jeff',
     });
   });
 });
