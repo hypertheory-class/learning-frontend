@@ -41,7 +41,52 @@ describe('functions', () => {
     });
   });
 
-  describe('higher order functions', () => {});
+  describe('higher order functions', () => {
+    /* In mathematics and computer science, a higher-order function is a function that does at least one of the following:
+
+        - takes one or more functions as arguments (i.e. a procedural parameter, which is a parameter of a procedure that is itself a procedure),
+        - returns a function as its result.
+  */
+    it('using just a basic lower ordered function', () => {
+      function makeElement(element: string, content: string): string {
+        return `<${element}>${content}</${element}>`;
+      }
+
+      expect(makeElement('h1', 'Hi')).toBe('<h1>Hi</h1>');
+      expect(makeElement('h1', 'Bye')).toBe('<h1>Bye</h1>');
+      expect(makeElement('p', 'nose')).toBe('<p>nose</p>');
+    });
+
+    it('same thing, OOP style', () => {
+      class ElementMaker {
+        constructor(private element: string) {}
+
+        make(content: string): string {
+          return `<${this.element}>${content}</${this.element}>`;
+        }
+      }
+
+      const h1Maker = new ElementMaker('h1');
+      const pMaker = new ElementMaker('p');
+
+      expect(h1Maker.make('Hi')).toBe('<h1>Hi</h1>');
+      expect(h1Maker.make('Bye')).toBe('<h1>Bye</h1>');
+      expect(pMaker.make('nose')).toBe('<p>nose</p>');
+    });
+
+    it('with a HOF', () => {
+      type FuncThatTakesAndReturnsAString = (content: string) => string;
+      function elementMaker(element: string): FuncThatTakesAndReturnsAString {
+        return (content) => `<${element}>${content}</${element}>`;
+      }
+
+      const h1Maker = elementMaker('h1');
+      const pMaker = elementMaker('p');
+
+      expect(h1Maker('Hi')).toBe('<h1>Hi</h1>');
+      expect(pMaker('nose')).toBe('<p>nose</p>');
+    });
+  });
 
   describe('array methods', () => {});
 });
