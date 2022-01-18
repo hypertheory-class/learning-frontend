@@ -86,6 +86,21 @@ describe('functions', () => {
       expect(h1Maker('Hi')).toBe('<h1>Hi</h1>');
       expect(pMaker('nose')).toBe('<p>nose</p>');
     });
+
+    it('arguments to functions', () => {
+      // Rest operator ...
+
+      function add(a: number = 2, b: number = 10, ...rest: number[]): number {
+        const firstTwo = a + b;
+        return rest.reduce((l, r) => l + r, firstTwo);
+      }
+
+      expect(add(2, 2)).toBe(4);
+      expect(add(10)).toBe(20);
+      expect(add()).toBe(12);
+      expect(add(undefined, 5)).toBe(7);
+      expect(add(1, 2, 3, 4, 5, 6, 7, 8, 9)).toBe(45);
+    });
   });
 
   describe('array methods', () => {});
