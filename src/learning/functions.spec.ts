@@ -1,3 +1,5 @@
+import { isEven, isOdd as isWeird } from 'src/utils/math';
+// import * as fromMath from '../utils/math';
 describe('functions', () => {
   describe('declaring functions', () => {
     it('named functions', () => {
@@ -115,15 +117,9 @@ describe('functions', () => {
     describe('array methods that create a new array', () => {
       it('filter', () => {
         // Where in LINQ
-        function isEven(n: number): boolean {
-          return n % 2 === 0;
-        }
-        function isOdd(n: number): boolean {
-          return !isEven(n);
-        }
 
         const evens = numbers.filter(isEven); // rookie mistake
-        const odds = numbers.filter(isOdd);
+        const odds = numbers.filter(isWeird);
         const bigNumbers = numbers.filter((n) => n > 1000);
 
         expect(bigNumbers).toEqual([]);
@@ -149,7 +145,15 @@ describe('functions', () => {
     });
 
     describe('array methods that return a single (scalar) value', () => {
-      it('checking the membership of an array', () => {});
+      it('checking the membership of an array', () => {
+        // In LINQ that All
+        const allEven = numbers.every(isEven);
+        expect(allEven).toBeFalse();
+
+        // in Linq that is Any
+        const someEven = numbers.some(isEven);
+        expect(someEven).toBeTrue();
+      });
 
       it('boiling down an array to a single value', () => {});
     });
