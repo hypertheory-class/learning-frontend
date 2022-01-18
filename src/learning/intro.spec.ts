@@ -111,4 +111,34 @@ describe('data types in typescript', () => {
       let second = yourFriends[1];
     });
   });
+
+  describe('const and let', () => {
+    it('const cannot be reassigned to', () => {
+      const name = 'Jeff'; // const must be initialized.
+
+      const age = 52;
+
+      // you cannot use the assignment operator on it after it is initialized.
+      // name = 'Joe';
+
+      // it does not make changeable things unchangable. (changeable = mutable, unchangeable = immutable)
+      // for example, arrays are changeable.
+
+      const numbers = [1, 2, 3, 4];
+
+      // can't reassign to variable
+      // numbers = [10, 11, 12];
+
+      numbers[0] = 20;
+
+      expect(numbers).toEqual([20, 2, 3, 4]);
+
+      const book = {
+        title: 'Jerusalem',
+        author: 'Blake',
+      };
+
+      book.author = 'William Blake';
+    });
+  });
 });

@@ -11,8 +11,16 @@ describe('functions', () => {
       expect(subtract(20, 3)).toBe(17);
     });
 
-    it('anonymous functions', () => {
+    it('forward referencing a module scoped function', () => {
       expect(subtract(10, 2)).toBe(8);
+    });
+    it('anonymous functions', () => {
+      // anonymous function
+      expect(((a: number, b: number): number => a * b)(5, 5)).toBe(25);
+
+      const multiply = (a: number, b: number): number => a * b;
+
+      expect(multiply(5, 5)).toBe(25);
     });
   });
 
