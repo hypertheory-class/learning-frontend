@@ -1,14 +1,3 @@
 <header>
   <h1>Welcome to {{ title }}</h1>
-  <p (click)="makeUpper()" class="subheading">Click me for a good time</p>
 </header>
-<main>
-  <ul>
-    <li *ngFor="let topic of topics">{{ topic }}</li>
-  </ul>
-</main>
-
-<div>
-  <input #topicEntry type="text" />
-  <button (click)="addItem(topicEntry)">Add This Item</button>
-</div>
