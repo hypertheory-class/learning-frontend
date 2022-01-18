@@ -28,6 +28,7 @@ describe('data types in typescript', () => {
       a = 'tacos';
       expect(typeof a).toBe('string');
 
+      a = 3.14;
       expect(typeof a).toBe('number');
     });
   });
