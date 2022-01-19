@@ -18,4 +18,8 @@ export class ThankYouComponent implements OnInit {
   addItem(item: ThankYouCardCreate) {
     this.service.addItem(item);
   }
+
+  markAsSent(card: ThankYouCardModel) {
+    this.service.cardSent(card);
+  }
 }

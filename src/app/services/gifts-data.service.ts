@@ -23,6 +23,13 @@ export class GiftsDataService {
   private _subject = new BehaviorSubject<ThankYouCardModel[]>(this._data);
   // you let other pieces appliation "observe" that subject
 
+  cardSent(card: ThankYouCardModel) {
+    // send this to the API to update it (use a PUT)
+    this._data.filter((item) => item.id === card.id)[0].sent = true;
+    // BAD - mutating it, but we are almost done and going to throw this away tomorrow morning
+    this._subject.next(this._data);
+  }
+
   getAll(): Observable<ThankYouCardModel[]> {
     return this._subject.asObservable();
   }

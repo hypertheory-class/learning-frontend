@@ -2,4 +2,6 @@
   <h3>Your Dashboard</h3>
 </header>
 
-<app-dashboard-thank-you-summary></app-dashboard-thank-you-summary>
+<app-dashboard-thank-you-summary
+  [summary]="giftSummary$ | async"
+></app-dashboard-thank-you-summary>

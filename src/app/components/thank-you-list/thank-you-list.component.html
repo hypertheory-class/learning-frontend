@@ -10,7 +10,13 @@
       <p>Send a card to {{ card.to }} for {{ card.reason }}</p>
     </div>
     <div class="card-footer">
-      <button *ngIf="!card.sent" class="btn btn-link">I've Sent It</button>
+      <button
+        *ngIf="!card.sent"
+        class="btn btn-link"
+        (click)="markAsSent(card)"
+      >
+        I've Sent It
+      </button>
       <p *ngIf="card.sent">
         Card was sent on {{ card.when | date: "fullDate" }}
       </p>
