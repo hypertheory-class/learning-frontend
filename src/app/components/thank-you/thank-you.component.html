@@ -3,7 +3,7 @@
 </header>
 <div class="row">
   <div class="col">
-    <app-thank-you-entry></app-thank-you-entry>
+    <app-thank-you-entry (cardAdded)="addItem($event)"></app-thank-you-entry>
   </div>
   <div class="col">
     <app-thank-you-list

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ThankYouCardCreate } from 'src/app/models/thank-you-card-create';
 
 @Component({
   selector: 'app-thank-you-entry',
@@ -15,6 +16,7 @@ export class ThankYouEntryComponent implements OnInit {
 
   /// public string Name {get;}
 
+  @Output() cardAdded = new EventEmitter<ThankYouCardCreate>();
   get to() {
     return this.form.get('to');
   }
@@ -25,7 +27,7 @@ export class ThankYouEntryComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      this.cardAdded.emit(this.form.value);
     } else {
       console.log(this.form.errors);
     }

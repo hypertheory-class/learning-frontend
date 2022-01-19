@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThankYouCardModel } from 'src/app/models/thank-you-card';
+import { ThankYouCardCreate } from 'src/app/models/thank-you-card-create';
 
 @Component({
   selector: 'app-thank-you',
@@ -8,7 +9,7 @@ import { ThankYouCardModel } from 'src/app/models/thank-you-card';
 })
 export class ThankYouComponent implements OnInit {
   listTitle = 'Your Thank-You Card List';
-
+  private lastId = 4;
   cardList: ThankYouCardModel[] = [
     { id: '1', to: 'Joe', reason: 'Mowed Lawn', sent: false },
     { id: '2', to: 'Sue', reason: 'Cleaned Car', sent: false },
@@ -23,4 +24,14 @@ export class ThankYouComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  addItem(item: ThankYouCardCreate) {
+    const itemToAdd = {
+      ...item,
+      id: (this.lastId++).toString(),
+      sent: false,
+    } as ThankYouCardModel;
+
+    this.cardList = [itemToAdd, ...this.cardList];
+  }
 }
