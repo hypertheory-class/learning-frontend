@@ -1,0 +1,10 @@
+.subheading {
+  color: red;
+  font-size: 1.8em;
+}
+
+.title-bar {
+  background-color: lightgray;
+  padding-bottom: 10px;
+  border-bottom: 3px solid black;
+}
