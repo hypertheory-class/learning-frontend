@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ThankYouCardCreate } from 'src/app/models/thank-you-card-create';
+import { ThankYouCardCreate } from 'src/app/models';
 
 @Component({
   selector: 'app-thank-you-entry',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ThankYouCardModel } from 'src/app/models/thank-you-card';
+import { ThankYouCardModel } from 'src/app/models';
 
 @Component({
   selector: 'app-thank-you-list',
