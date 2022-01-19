@@ -7,7 +7,7 @@
   </div>
   <div class="col">
     <app-thank-you-list
-      [list]="cardList"
+      [list]="cardList$ | async"
       [caption]="listTitle"
     ></app-thank-you-list>
   </div>

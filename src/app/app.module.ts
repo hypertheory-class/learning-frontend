@@ -9,6 +9,7 @@ import { ThankYouEntryComponent } from './components/thank-you-entry/thank-you-e
 import { ThankYouListComponent } from './components/thank-you-list/thank-you-list.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
+import { GiftsDataService } from './services/gifts-data.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
     ThankYouListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
-  providers: [], // services!
+  providers: [GiftsDataService], // services!
   bootstrap: [AppComponent],
 })
 export class AppModule {}

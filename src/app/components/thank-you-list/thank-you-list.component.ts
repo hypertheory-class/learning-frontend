@@ -7,7 +7,7 @@ import { ThankYouCardModel } from 'src/app/models';
   styleUrls: ['./thank-you-list.component.css'],
 })
 export class ThankYouListComponent implements OnInit {
-  @Input() list: ThankYouCardModel[] = [];
+  @Input() list: ThankYouCardModel[] | null = [];
   @Input() caption = 'Your List of Thank You Cards';
   constructor() {}
 

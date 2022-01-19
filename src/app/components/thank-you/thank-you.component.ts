@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ThankYouCardCreate, ThankYouCardModel } from 'src/app/models';
+import { GiftsDataService } from 'src/app/services/gifts-data.service';
 
 @Component({
   selector: 'app-thank-you',
@@ -9,28 +11,12 @@ import { ThankYouCardCreate, ThankYouCardModel } from 'src/app/models';
 export class ThankYouComponent implements OnInit {
   listTitle = 'Your Thank-You Card List';
   private lastId = 4;
-  cardList: ThankYouCardModel[] = [
-    { id: '1', to: 'Joe', reason: 'Mowed Lawn', sent: false },
-    { id: '2', to: 'Sue', reason: 'Cleaned Car', sent: false },
-    {
-      id: '3',
-      to: 'Mel',
-      reason: 'Planted Flowers',
-      sent: true,
-      when: '2022-01-19T19:04:23.186Z',
-    },
-  ];
-  constructor() {}
+  cardList$: Observable<ThankYouCardModel[]> = this.service.getAll();
+  constructor(private service: GiftsDataService) {}
 
   ngOnInit(): void {}
 
   addItem(item: ThankYouCardCreate) {
-    const itemToAdd = {
-      ...item,
-      id: (this.lastId++).toString(),
-      sent: false,
-    } as ThankYouCardModel;
-
-    this.cardList = [itemToAdd, ...this.cardList];
+    this.service.addItem(item);
   }
 }
