@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
-  declarations: [AppComponent, TitleBarComponent, DashboardComponent, ThankYouComponent],
+  declarations: [AppComponent, TitleBarComponent, DashboardComponent, ThankYouComponent, NavigationComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [], // services!
   bootstrap: [AppComponent],
