@@ -1,5 +1,9 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ThankYouCardCreate, ThankYouCardModel } from '../models';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import {
+  ThankYouCardCreate,
+  ThankYouCardModel,
+  ThankYouDashboardSummary,
+} from '../models';
 
 export class GiftsDataService {
   // subject
@@ -35,5 +39,16 @@ export class GiftsDataService {
     this._data = [newItem, ...this._data];
     // tell the _subject there is new data. It will PUSH that data to all the components that are observing it.
     this._subject.next(this._data);
+  }
+
+  getDashboardSummary(): Observable<ThankYouDashboardSummary> {
+    return this._subject.asObservable().pipe(
+      map((data) => {
+        return {
+          sent: data.filter((item) => item.sent).length,
+          needSent: data.filter((item) => !item.sent).length,
+        } as ThankYouDashboardSummary;
+      })
+    );
   }
 }

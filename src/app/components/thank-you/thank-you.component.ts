@@ -10,7 +10,6 @@ import { GiftsDataService } from 'src/app/services/gifts-data.service';
 })
 export class ThankYouComponent implements OnInit {
   listTitle = 'Your Thank-You Card List';
-  private lastId = 4;
   cardList$: Observable<ThankYouCardModel[]> = this.service.getAll();
   constructor(private service: GiftsDataService) {}
 

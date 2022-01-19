@@ -10,6 +10,7 @@ import { ThankYouListComponent } from './components/thank-you-list/thank-you-lis
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { GiftsDataService } from './services/gifts-data.service';
+import { DashboardThankYouSummaryComponent } from './components/dashboard-thank-you-summary/dashboard-thank-you-summary.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { GiftsDataService } from './services/gifts-data.service';
     NavigationComponent,
     ThankYouEntryComponent,
     ThankYouListComponent,
+    DashboardThankYouSummaryComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [GiftsDataService], // services!
