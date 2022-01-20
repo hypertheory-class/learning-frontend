@@ -1,33 +1,39 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // never import any other environment file.
 import {
   ThankYouCardCreate,
   ThankYouCardModel,
   ThankYouDashboardSummary,
 } from '../models';
 
+@Injectable()
 export class GiftsDataService {
   // subject
+  private readonly apiUrl = environment.apiUrl;
+  constructor(private client: HttpClient) {
+    this.loadData();
+  }
 
-  private lastId = 4;
-  private _data: ThankYouCardModel[] = [
-    { id: '1', to: 'Joe', reason: 'Mowed Lawn', sent: false },
-    { id: '2', to: 'Sue', reason: 'Cleaned Car', sent: false },
-    {
-      id: '3',
-      to: 'Mel',
-      reason: 'Planted Flowers',
-      sent: true,
-      when: '2022-01-19T19:04:23.186Z',
-    },
-  ];
+  private loadData() {
+    this.client
+      .get<{ data: ThankYouCardModel[] }>(this.apiUrl)
+      .pipe(map((results) => results.data))
+      .subscribe((results) => {
+        this._data = results;
+        this._subject.next(this._data);
+      });
+  }
+  private _data: ThankYouCardModel[] = [];
   private _subject = new BehaviorSubject<ThankYouCardModel[]>(this._data);
   // you let other pieces appliation "observe" that subject
 
   cardSent(card: ThankYouCardModel) {
-    // send this to the API to update it (use a PUT)
-    this._data.filter((item) => item.id === card.id)[0].sent = true;
-    // BAD - mutating it, but we are almost done and going to throw this away tomorrow morning
-    this._subject.next(this._data);
+    this.client.post(this.apiUrl + 'sent', card).subscribe(() => {
+      this._data.filter((x) => x.id == card.id)[0].sent = true;
+      this._subject.next(this._data);
+    });
   }
 
   getAll(): Observable<ThankYouCardModel[]> {
@@ -35,17 +41,10 @@ export class GiftsDataService {
   }
 
   addItem(item: ThankYouCardCreate): void {
-    // send that sucker to the server.
-    // when the server returns it (201, Created, with a copy of the data)
-    const newItem = {
-      ...item,
-      sent: false,
-      id: (this.lastId++).toString(),
-    } as ThankYouCardModel;
-    // Add that to the _data array.
-    this._data = [newItem, ...this._data];
-    // tell the _subject there is new data. It will PUSH that data to all the components that are observing it.
-    this._subject.next(this._data);
+    this.client.post<ThankYouCardModel>(this.apiUrl, item).subscribe((r) => {
+      this._data = [r, ...this._data];
+      this._subject.next(this._data);
+    });
   }
 
   getDashboardSummary(): Observable<ThankYouDashboardSummary> {
