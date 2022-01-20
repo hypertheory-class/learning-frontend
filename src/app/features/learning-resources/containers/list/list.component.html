@@ -1,6 +1,10 @@
+<div class="alert alert-info" *ngIf="(model$ | async)?.length === 0">
+  You have no learning resources!
+</div>
+
 <a
   [routerLink]="['..', 'details', item.id]"
   class="badge rounded-pill bg-primary"
-  *ngFor="let item of model"
+  *ngFor="let item of model$ | async"
   >{{ item.title }}</a
 >

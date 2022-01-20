@@ -6,6 +6,7 @@ import {
 import * as fromModels from '../models';
 import * as fromResourceSummaries from './resource-summary.reducer';
 export const featureName = 'learningResourcesFeature';
+
 export interface LearningResourcesState {
   resourceSummaries: fromResourceSummaries.ResourceSummaryState;
 }

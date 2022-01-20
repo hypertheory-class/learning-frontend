@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +40,7 @@ import { GiftsDataService } from './services/gifts-data.service';
     HttpClientModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([]),
   ],
   providers: [GiftsDataService], // services!
   bootstrap: [AppComponent],

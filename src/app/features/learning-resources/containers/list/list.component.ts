@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LearningResourceSummaryItem } from '../../models';
+import { Store } from '@ngrx/store';
+import { selectLearningResourceSummaryItems } from '../../reducers';
 
 @Component({
   selector: 'app-list',
@@ -7,8 +8,8 @@ import { LearningResourceSummaryItem } from '../../models';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  model: LearningResourceSummaryItem[] = [];
-  constructor() {}
+  model$ = this.store.select(selectLearningResourceSummaryItems);
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 }
