@@ -1,4 +1,8 @@
-import { ActionReducerMap, createSelector } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createFeatureSelector,
+  createSelector,
+} from '@ngrx/store';
 import * as fromCounterComponent from './counter-component.reducer';
 
 // configuration for the store module.
@@ -16,9 +20,13 @@ export const reducers: ActionReducerMap<AppState> = {
 // Selector Functions
 
 // 1. Create a feature selector (we aren't in a feature, so we'll skip this step)
-
 // 2. Create one that can get to each branch of the application state.
-const selectCounterBranch = (state: AppState) => state.counterComponent;
+// This is the "right way" to do something wrong...
+const selectCounterBranch =
+  createFeatureSelector<fromCounterComponent.CounterComponentState>(
+    'counterComponent'
+  );
+// const selectCounterBranch = (state: AppState) => state.counterComponent;
 // 3. Helpers? (optional)
 
 // 4. Export the selector functions that the components need.

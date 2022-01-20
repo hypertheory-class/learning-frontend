@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  AppState,
   selectCounterCurrent,
   selectShouldCounterResetBeDisabled,
 } from 'src/app/reducers';
@@ -14,7 +13,7 @@ import * as actions from '../../actions/counter-component.actions';
 export class CounterComponent implements OnInit {
   current$ = this.store.select(selectCounterCurrent);
   resetDisabled$ = this.store.select(selectShouldCounterResetBeDisabled);
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 

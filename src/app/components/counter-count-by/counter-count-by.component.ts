@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState, selectCounterCountBy } from 'src/app/reducers';
+import { selectCounterCountBy } from 'src/app/reducers';
 import * as actions from '../../actions/counter-component.actions';
 @Component({
   selector: 'app-counter-count-by',
@@ -9,7 +9,7 @@ import * as actions from '../../actions/counter-component.actions';
 })
 export class CounterCountByComponent implements OnInit {
   countingBy$ = this.store.select(selectCounterCountBy);
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 
