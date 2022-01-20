@@ -1,1 +1,6 @@
-<p>list works!</p>
+<a
+  [routerLink]="['..', 'details', item.id]"
+  class="badge rounded-pill bg-primary"
+  *ngFor="let item of model"
+  >{{ item.title }}</a
+>
