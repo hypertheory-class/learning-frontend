@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/reducers';
+import {
+  AppState,
+  selectCounterCurrent,
+  selectShouldCounterResetBeDisabled,
+} from 'src/app/reducers';
 import * as actions from '../../actions/counter-component.actions';
 @Component({
   selector: 'app-counter',
@@ -8,7 +12,8 @@ import * as actions from '../../actions/counter-component.actions';
   styleUrls: ['./counter.component.css'],
 })
 export class CounterComponent implements OnInit {
-  current$ = this.store.select((s) => s.counterComponent.current);
+  current$ = this.store.select(selectCounterCurrent);
+  resetDisabled$ = this.store.select(selectShouldCounterResetBeDisabled);
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
@@ -19,5 +24,9 @@ export class CounterComponent implements OnInit {
 
   decrement() {
     this.store.dispatch(actions.countDecremented());
+  }
+
+  reset() {
+    this.store.dispatch(actions.countReset());
   }
 }

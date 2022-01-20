@@ -11,6 +11,7 @@ const initialState: CounterComponentState = {
 
 export const reducer = createReducer(
   initialState,
+  on(actions.countReset, () => initialState),
   on(actions.countIncremented, (currentState) => ({
     ...currentState,
     current: currentState.current + 1,

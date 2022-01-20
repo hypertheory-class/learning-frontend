@@ -8,3 +8,5 @@ export const countIncremented = createAction(
 export const countDecremented = createAction(
   '[counter component] count decremented'
 );
+
+export const countReset = createAction('[counter component] count reset');
