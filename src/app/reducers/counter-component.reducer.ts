@@ -1,4 +1,5 @@
-import { Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import * as actions from '../actions/counter-component.actions';
 
 export interface CounterComponentState {
   current: number;
@@ -7,18 +8,15 @@ export interface CounterComponentState {
 const initialState: CounterComponentState = {
   current: 0,
 };
-export function reducer(
-  state: CounterComponentState = initialState,
-  action: Action
-): CounterComponentState {
-  switch (action.type) {
-    case 'count incremented': {
-      return { ...state, current: state.current + 1 };
-    }
-    case 'count decremented': {
-      return { ...state, current: state.current - 1 };
-    }
-    default:
-      return state;
-  }
-}
+
+export const reducer = createReducer(
+  initialState,
+  on(actions.countIncremented, (currentState) => ({
+    ...currentState,
+    current: currentState.current + 1,
+  })),
+  on(actions.countDecremented, (currentState) => ({
+    ...currentState,
+    current: currentState.current - 1,
+  }))
+);
