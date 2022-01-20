@@ -16,6 +16,7 @@ import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { reducers } from './reducers';
 import { GiftsDataService } from './services/gifts-data.service';
+import { CounterCountByComponent } from './components/counter-count-by/counter-count-by.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { GiftsDataService } from './services/gifts-data.service';
     ThankYouListComponent,
     DashboardThankYouSummaryComponent,
     CounterComponent,
+    CounterCountByComponent,
   ],
   imports: [
     BrowserModule,

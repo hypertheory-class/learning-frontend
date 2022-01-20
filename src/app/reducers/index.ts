@@ -18,15 +18,22 @@ export const reducers: ActionReducerMap<AppState> = {
 // 1. Create a feature selector (we aren't in a feature, so we'll skip this step)
 
 // 2. Create one that can get to each branch of the application state.
-
+const selectCounterBranch = (state: AppState) => state.counterComponent;
 // 3. Helpers? (optional)
 
 // 4. Export the selector functions that the components need.
 
-export const selectCounterCurrent = (state: AppState) =>
-  state.counterComponent.current;
+export const selectCounterCurrent = createSelector(
+  selectCounterBranch,
+  (b) => b.current
+);
 
 export const selectShouldCounterResetBeDisabled = createSelector(
   selectCounterCurrent,
   (c: number) => c === 0
+);
+
+export const selectCounterCountBy = createSelector(
+  selectCounterBranch,
+  (b) => b.by
 );

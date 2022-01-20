@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 // Action Creators - little functions that create actions for you!
 export const countIncremented = createAction(
@@ -10,3 +10,8 @@ export const countDecremented = createAction(
 );
 
 export const countReset = createAction('[counter component] count reset');
+
+export const countBySet = createAction(
+  '[counter component] count by set',
+  props<{ by: number }>()
+);
