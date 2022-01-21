@@ -1,0 +1,7 @@
+.git
+/dist
+.editorconfig
+/.angular
+/.vscode/*
+/node_modules
+.gitignore
