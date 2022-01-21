@@ -11,7 +11,7 @@ import {
 @Injectable()
 export class GiftsDataService {
   // subject
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment.apiUrl + 'v1/cards';
   constructor(private client: HttpClient) {
     this.loadData();
   }
